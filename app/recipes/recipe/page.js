@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import '../recipes.css';
 import TypewriterEffect from '../TypewriterEffect.js';
@@ -84,7 +85,7 @@ async function loadAIInstructions(recipeName, ingredients, servings) {
   return data.choices[0].message.content;
 }
 
-export default function RecipePage() {
+function RecipeContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const [recipe, setRecipe] = useState(null);
@@ -244,5 +245,13 @@ export default function RecipePage() {
       </div>
       
     </main>
+  );
+}
+
+export default function RecipePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RecipeContent />
+    </Suspense>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import './recipes.css';
 
@@ -59,7 +60,7 @@ async function fetchRecipes(query) {
   }
 }
 
-export default function RecipesPage() {
+function RecipesContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const [recipes, setRecipes] = useState([]);
@@ -236,5 +237,13 @@ href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
       </div>
       
     </main>
+  );
+}
+
+export default function RecipesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RecipesContent />
+    </Suspense>
   );
 }
