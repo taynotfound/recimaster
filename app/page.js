@@ -97,8 +97,37 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <div className="container mx-auto flex justify-center space-x-4 p-5 rounded-lg">
+          <a
+            href="https://discord.gg/C2bAXnYXzm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            Discord Server
+          </a>
+          <a
+            href="https://github.com/taynotfound/recimaster"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            GitHub Repo
+          </a>
+          <a
+            href="https://taynotfound.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            My Website
+          </a>
+        </div>
+        <div className="container mx-auto flex justify-center space-x-4 rounded-lg">
+        <p className="justify-center">Copyright 2024 Tay März</p>
+        </div>
       </div>
-
+      
    
     </main>
   );

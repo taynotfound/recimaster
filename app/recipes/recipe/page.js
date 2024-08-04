@@ -123,11 +123,20 @@ export default function RecipePage() {
     setIsLoadingInstructions(false);
   };
 
-  if (loading) return <p className="text-white text-xl">Loading...</p>;
+  if (loading) return (
+    <main className="flex min-h-screen flex-col items-center justify-start bg-slate-950 p-4">
+
+    <div>
+    <p className="text-white text-xl">Cooking up the ingredients...</p>
+    <Image src="https://media3.giphy.com/media/YoKaNSoTHog8Y3550r/source.gif" alt="Cooking" width={300} height={300} />
+    </div>
+  <p className="text-white text-xl">Loading...</p>
+  </main>);
   if (!recipe) return <p className="text-white text-xl">Recipe not found.</p>;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start bg-slate-950 p-4">
+        
       <h1 className="text-4xl text-white font-bold mb-8">{recipe.label}</h1>
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8">
         <div className="md:w-1/3">
@@ -201,6 +210,39 @@ export default function RecipePage() {
           </div>
         </div>
       </div>
+      <div className="w-full max-w-4xl bg-slate-900 rounded-xl shadow-lg p-8 mt-24">
+      
+        <div className="container mx-auto flex justify-center space-x-4 p-5 rounded-lg">
+          <a
+            href="https://discord.gg/C2bAXnYXzm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            Discord Server
+          </a>
+          <a
+            href="https://github.com/taynotfound/recimaster"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            GitHub Repo
+          </a>
+          <a
+            href="https://taynotfound.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            My Website
+          </a>
+        </div>
+        <div className="container mx-auto flex justify-center space-x-4 rounded-lg">
+        <p className="justify-center">Copyright 2024 Tay März</p>
+        </div>
+      </div>
+      
     </main>
   );
 }
