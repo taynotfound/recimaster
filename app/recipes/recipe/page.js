@@ -234,7 +234,7 @@ function RecipeContent() {
             <h2 className="text-2xl text-white font-bold mb-2">Share this recipe</h2>
             <div className="flex space-x-2">
               <a
-                href={`https://bsky.com/intent/compose?text=${encodeURIComponent(shareTextPerSocial.twitter)}`}
+                href={`https://bsky.app/intent/compose?text=${encodeURIComponent(shareTextPerSocial.twitter)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-400 text-white p-2 rounded-lg hover:bg-blue-500 transition-colors flex items-center"
