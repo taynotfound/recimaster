@@ -9,14 +9,14 @@ const TypewriterEffect = ({ text }) => {
       const timer = setTimeout(() => {
         setDisplayedText(prevText => prevText + text[currentIndex]);
         setCurrentIndex(prevIndex => prevIndex + 1);
-      }, 20); // Adjust the speed of typing here
+      }, 10); // Adjust the speed of typing here
 
       return () => clearTimeout(timer);
     }
   }, [currentIndex, text]);
 
   return (
-    <div className="text-white whitespace-pre-wrap">
+    <div className="text-white whitespace-pre-wrap text-lg">
       {displayedText}
     </div>
   );
