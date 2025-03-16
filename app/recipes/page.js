@@ -5,8 +5,23 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import './recipes.css';
+import { setCache, getCache } from './cache'; // Import cache utility
+import BlueskyIcon from '../../public/icons/bluesky.svg';
+import CopyIcon from '../../public/icons/copy.svg';
+import DiscordIcon from '../../public/icons/discord.svg';
+import FacebookIcon from '../../public/icons/facebook.svg';
+import GithubIcon from '../../public/icons/github.svg';
+import WebsiteIcon from '../../public/icons/website.svg';
+import WhatsappIcon from '../../public/icons/whatsapp.svg';
+import YoutubeIcon from '../../public/icons/youtube.svg';
 
 async function fetchRecipes(query) {
+  // Check if the recipes are already in the cache
+  const cachedData = getCache(query);
+  if (cachedData) {
+    return cachedData;
+  }
+
   const appId = process.env.NEXT_PUBLIC_EDAMAM_ID;
   const appKey = process.env.NEXT_PUBLIC_EDAMAM_KEY;
 
@@ -38,6 +53,9 @@ async function fetchRecipes(query) {
       throw new Error('Failed to fetch recipes');
     }
     const data = await response.json();
+    
+    // Store the fetched data in the cache
+    setCache(query, data);
     return data;
   } catch (error) {
     console.error('Error fetching recipes:', error);
@@ -126,25 +144,38 @@ function RecipesContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  let head = `Search Results for "${query || "All"}" - ReciMaster`;
+  if(query === 'New') {
+    head = `Discover New Recipes - ReciMaster`;
+  } else if(query === '') {
+    head =  `Search some recipes - ReciMaster`;
+  }
+
+  // Replace sharing option from Twitter to Bluesky
+  const sharingOptions = [
+    { name: 'Bluesky', icon: BlueskyIcon },
+    // other sharing options...
+  ];
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-start bg-slate-950 p-4">
-      <h1 className="text-4xl text-white font-bold mb-8">Search Results for "{query || "All"}"</h1>
-            <form action="/recipes" method="get" className="flex space-x-2 pb-12">
-  <input
-    type="text"
-    name="q"
-    className="p-2 w-64 rounded-lg bg-slate-700 text-white"
-    placeholder="Search for other recipes..."
-  />
-  <button type="submit" className="bg-slate-800 text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
-    Search
-  </button>
-  </form>
+      <h1 className="text-4xl text-white font-bold mb-8">{head}</h1>
+      <form action="/recipes" method="get" className="flex space-x-2 pb-12">
+        <input
+          type="text"
+          name="q"
+          className="p-2 w-64 rounded-lg bg-slate-700 text-white"
+          placeholder="Search for other recipes..."
+        />
+        <button type="submit" className="bg-slate-800 text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
+          Search
+        </button>
+      </form>
       
       {loading ? (
         <div>
-        <p className="text-white text-xl">Cooking up some recipes...</p>
-        <Image src="https://media3.giphy.com/media/YoKaNSoTHog8Y3550r/source.gif" alt="Cooking" width={300} height={300} />
+          <p className="text-white text-xl">Cooking up some recipes...</p>
+          <Image src="https://media3.giphy.com/media/YoKaNSoTHog8Y3550r/source.gif" alt="Cooking" width={300} height={300} />
         </div>
       ) : recipes.length === 0 ? (
         <p className="text-white text-xl">No recipes found for "{query}". Try a different search term.</p>
@@ -152,10 +183,9 @@ function RecipesContent() {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {recipes.slice(0, visibleRecipes).map((recipe, index) => (
-                
               <div 
                 key={index} 
-                className="bg-slate-900 rounded-xl shadow-lg p-6 space-y-4 recipe-card"
+                className="bg-slate-900 rounded-xl shadow-lg p-6 space-y-4 recipe-card frosted-glass"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
                 <Image
@@ -169,11 +199,8 @@ function RecipesContent() {
                 <p className="text-slate-400">Source: {recipe.source}</p>
                 <p className="text-slate-400">Calories: {Math.round(recipe.calories / recipe.yield)} kcal</p>
                 <p className="text-slate-400">Time: {recipe.totalTime ? `${recipe.totalTime} minutes` : <span className='text-red-200'>N/A</span>}</p>
-               
                 <a
-href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
                   className="inline-block mt-4 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors"
                 >
                   View Recipe
@@ -191,7 +218,6 @@ href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
           ) : recipes.length > visibleRecipes && (
             <p className="mt-8 text-white text-xl">There is literally nothing to load anymore lol</p>
           )}
-            
         </>
       )}
       {showScrollTop && (
@@ -203,8 +229,7 @@ href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
           ↑
         </button>
       )}
-       <div className="w-full max-w-4xl bg-slate-900 rounded-xl shadow-lg p-8 mt-24">
-        
+      <div className="w-full max-w-4xl bg-slate-900 rounded-xl shadow-lg p-8 mt-24">
         <div className="container mx-auto flex justify-center space-x-4 p-5 rounded-lg">
           <a
             href="https://discord.gg/C2bAXnYXzm"
@@ -212,7 +237,7 @@ href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
             rel="noopener noreferrer"
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            Discord Server
+            <Image src={DiscordIcon} alt="Discord" width={24} height={24} />
           </a>
           <a
             href="https://github.com/taynotfound/recimaster"
@@ -220,7 +245,7 @@ href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
             rel="noopener noreferrer"
             className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            GitHub Repo
+            <Image src={GithubIcon} alt="GitHub" width={24} height={24} />
           </a>
           <a
             href="https://taynotfound.xyz"
@@ -228,14 +253,13 @@ href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
             rel="noopener noreferrer"
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            My Website
+            <Image src={WebsiteIcon} alt="Website" width={24} height={24} />
           </a>
         </div>
         <div className="container mx-auto flex justify-center space-x-4 rounded-lg">
-        <p className="justify-center">Copyright 2024 Tay März</p>
+          <p className="justify-center">Copyright 2025 Tay März</p>
         </div>
       </div>
-      
     </main>
   );
 }
