@@ -1,35 +1,48 @@
-
 import Image from "next/image";
+import BlueskyIcon from '../public/icons/bluesky.svg';
+import CopyIcon from '../public/icons/copy.svg';
+import DiscordIcon from '../public/icons/discord.svg';
+import FacebookIcon from '../public/icons/facebook.svg';
+import GithubIcon from '../public/icons/github.svg';
+import WebsiteIcon from '../public/icons/website.svg';
+import WhatsappIcon from '../public/icons/whatsapp.svg';
+import YoutubeIcon from '../public/icons/youtube.svg';
 
 export default function Home() {
 
   const team = [
     {
       name: "Tay",
-      image: "tay.png",
+      image: "/tay.png",
       role: "Developer"
     },
     {
       name: "Oli",
-      image: "oli.png",
+      image: "/oli.png",
       role: "Donated a singular Cent"
     },
     {
       name: "Don",
-      image: "don.png",
+      image: "https://cdn.discordapp.com/avatars/782970237179002920/a_bf549699e33bea82728915e52e6d1188.gif?size=2048",
       role: "Donated a singular Cent"
     },
     {
       name: "Webraft",
-      image: "webraft.png",
+      image: "/webraft.png",
       role: "AI Provider"
     },
     {
       name: "Edamam",
-      image: "edamam.png",
+      image: "/edamam.png",
       role: "Recipe Provider"
     }
   ]
+
+  const sharingOptions = [
+    { name: 'Bluesky', icon: BlueskyIcon },
+    // other sharing options...
+  ];
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-slate-950 p-4">
               <div className="flex space-x-2">
@@ -85,7 +98,7 @@ export default function Home() {
             <div key={index} className="flex flex-col items-center">
               <div className="w-20 h-20 rounded-full overflow-hidden mb-2">
                 <Image 
-                  src={`/${sponsor.image}`} 
+                  src={`${sponsor.image}`} 
                   alt={sponsor.name} 
                   width={80} 
                   height={80}
@@ -104,7 +117,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            Discord Server
+            <Image src={DiscordIcon} alt="Discord" width={24} height={24} />
           </a>
           <a
             href="https://github.com/taynotfound/recimaster"
@@ -112,7 +125,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            GitHub Repo
+            <Image src={GithubIcon} alt="GitHub" width={24} height={24} />
           </a>
           <a
             href="https://taynotfound.xyz"
@@ -120,11 +133,11 @@ export default function Home() {
             rel="noopener noreferrer"
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
-            My Website
+            <Image src={WebsiteIcon} alt="Website" width={24} height={24} />
           </a>
         </div>
         <div className="container mx-auto flex justify-center space-x-4 rounded-lg">
-        <p className="justify-center">Copyright 2024 Tay März</p>
+        <p className="justify-center">Copyright 2025 Tay März</p>
         </div>
       </div>
       
