@@ -128,6 +128,13 @@ function RecipeContent() {
     loadRecipe();
   }, [loadRecipe]);
 
+  // Add this useEffect to update the document title
+  useEffect(() => {
+    if (recipe) {
+      document.title = recipe.label + " - ReciMaster"; // Set the window title to the recipe label
+    }
+  }, [recipe]);
+
   const adjustIngredientAmount = (amount) => {
     if (!amount || isNaN(amount)) return '';
     const factor = servings / recipe.yield;

@@ -123,7 +123,12 @@ function RecipesContent() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+// Add this useEffect to update the document title
+useEffect(() => {
+  if (query) {
+    document.title = query + " - ReciMaster"; // Set the window title to the recipe label
+  }
+}, [query]);
   const loadMore = () => {
     const currentVisible = visibleRecipes;
     setVisibleRecipes(prev => prev + 6);
