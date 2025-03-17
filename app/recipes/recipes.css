@@ -1,11 +1,12 @@
 .scroll-to-top-btn {
     transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  
-  .scroll-to-top-btn.visible {
+}
+
+.scroll-to-top-btn.visible {
     opacity: 1;
     transform: translateY(0);
-  }
+}
+
 .hidden {
     display: none;
 }
@@ -13,39 +14,45 @@
 @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
-  }
-  
-  .loading-animation {
+}
+
+.loading-animation {
     animation: pulse 1.5s infinite;
-  }
-  
-  .typewriter-cursor::after {
+}
+
+.typewriter-cursor::after {
     content: '|';
     animation: blink 0.7s infinite;
-  }
-  
-  @keyframes blink {
+}
+
+@keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
-  }
+}
 
 @keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .recipe-card {
-  animation: popIn 0.5s ease-out forwards;
-  opacity: 0;
+    animation: popIn 0.5s ease-out forwards;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.3s ease; /* Add transition for hover effect */
 }
 
-
+.recipe-card:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
 
 .aspect-w-16 {
   position: relative;
@@ -66,7 +73,7 @@
   backdrop-filter: blur(10px); /* Blur effect */
   border-radius: 10px; /* Rounded corners */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
 }
 
 /* Animation for fading in */
@@ -97,4 +104,13 @@
   to {
     transform: scale(1);
   }
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lighten on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
