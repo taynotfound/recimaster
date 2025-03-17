@@ -158,7 +158,7 @@ function RecipesContent() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start bg-slate-950 p-4">
+    <main className="flex min-h-screen flex-col items-center justify-start p-4">
       <h1 className="text-4xl text-white font-bold mb-8">{head}</h1>
       <form action="/recipes" method="get" className="flex space-x-2 pb-12">
         <input
@@ -185,7 +185,7 @@ function RecipesContent() {
             {recipes.slice(0, visibleRecipes).map((recipe, index) => (
               <div 
                 key={index} 
-                className="bg-slate-900 rounded-xl shadow-lg p-6 space-y-4 recipe-card frosted-glass"
+                className="bg-slate-900 rounded-xl :shadow-lg shadow-md p-6 space-y-4 recipe-card frosted-glass"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
                 <Image
@@ -196,9 +196,9 @@ function RecipesContent() {
                   className="w-full h-48 object-cover rounded-lg"
                 />
                 <h2 className="text-2xl text-white font-bold">{recipe.label}</h2>
-                <p className="text-slate-400">Source: {recipe.source}</p>
-                <p className="text-slate-400">Calories: {Math.round(recipe.calories / recipe.yield)} kcal</p>
-                <p className="text-slate-400">Time: {recipe.totalTime ? `${recipe.totalTime} minutes` : <span className='text-red-200'>N/A</span>}</p>
+                <p className="text-slate-400 text-gray-50">Source: {recipe.source}</p>
+                <p className="text-slate-400 text-gray-50">Calories: {Math.round(recipe.calories / recipe.yield)} kcal</p>
+                <p className="text-slate-400 text-gray-50">Time: {recipe.totalTime ? `${recipe.totalTime} minutes` : <span className='text-red-200'>N/A</span>}</p>
                 <a
                   href={`/recipes/recipe?q=${recipe.uri.split('_').pop()}`}
                   className="inline-block mt-4 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors"
@@ -229,7 +229,7 @@ function RecipesContent() {
           ↑
         </button>
       )}
-      <div className="w-full max-w-4xl bg-slate-900 rounded-xl shadow-lg p-8 mt-24">
+      <div className="w-full max-w-4xl recipe-card frosted-glass rounded-xl shadow-lg p-8 mt-24">
         <div className="container mx-auto flex justify-center space-x-4 p-5 rounded-lg">
           <a
             href="https://discord.gg/C2bAXnYXzm"
