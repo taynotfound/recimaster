@@ -95,7 +95,7 @@ export default function Home() {
           <h4 className="text-white text-center text-xl font-semibold mb-6">Team:</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
             {team.map((sponsor, index) => (
-              <div key={index} className={`flex flex-col items-center ${sponsor.name === "Tay" ? "p-2 rounded-lg" : ""}`}>
+              <div key={index} className={`flex flex-col items-center ${sponsor.name === "Tay" ? "rounded-lg" : ""}`}>
                 <div className={`w-20 h-20 rounded-full overflow-hidden mb-2 ${sponsor.name === "Tay" ? "border-2 border-yellow-500 animate-pulse" : ""}`}>
                   <Image 
                     src={`${sponsor.image}`} 
