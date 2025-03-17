@@ -2,28 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 34, 0, 51;
+    --background-end-rgb: 44, 0 ,51;
   }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
-      transparent,
+      rgb(var(--background-start-rgb)),
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    );
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @layer utilities {
@@ -31,7 +32,6 @@ body {
     text-wrap: balance;
   }
 }
-
 
 @keyframes popIn {
   0% {
@@ -47,4 +47,17 @@ body {
 .card {
   animation: popIn 0.5s ease-out forwards;
   opacity: 0;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    border-color: rgba(255, 215, 0, 1); /* Original border color */
+  }
+  50% {
+    border-color: rgba(255, 215, 0, 0.5); /* Faded border color */
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite;
 }
