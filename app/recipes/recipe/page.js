@@ -209,10 +209,10 @@ function RecipeContent() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-4">
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8">
-        <h1 className="text-5xl text-black text-white font-extrabold mb-8 text-left">{recipe.label} - ReciMaster</h1>
+        <h1 className="text-5xl text-black text-white font-extrabold mb-7 mt-5 text-left">{recipe.label} - ReciMaster</h1>
         
       </div>
-      <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8">
+      <div className="w-full max-w-6xl flex flex-col md:flex-row gap-5">
         <div className="md:w-1/3">
           <Image
             src={recipe.image}
@@ -221,7 +221,7 @@ function RecipeContent() {
             height={400}
             className="w-full rounded-lg mb-4 shadow-lg"
           />
-          <div className="bg-slate-900 bg-gray-800 p-4 rounded-lg mb-4 recipe-card frosted-glass" style={{ animationDelay: `${0.1}s` }}>
+          <div className="bg-slate-900 bg-gray-800 p-5 rounded-lg mb-4 recipe-card frosted-glass" style={{ animationDelay: `${0.1}s` }}>
             <p className="text-gray-50 text-gray-300 text-sm italic">
               {recipe.totalTime} Minutes ・ {recipe.dishType.join(" ")} ・ {Math.round(recipe.calories)} kcal 
             </p>
@@ -232,7 +232,7 @@ function RecipeContent() {
                 type="number"
                 value={servings}
                 onChange={(e) => setServings(Math.max(1, parseInt(e.target.value) || 1))}
-                className="bg-slate-800 bg-gray-600 text-white text-gray-200 p-1 w-16 rounded"
+                className="bg-slate-800 bg-gray-600 text-white text-gray-200 p-1 w-16 rounded pr-3 pl-3"
               />
             </div>
             <ul className="list-disc list-inside text-white text-gray-200">
@@ -246,7 +246,7 @@ function RecipeContent() {
             </ul>
             <button
             onClick={toggleDetails}
-            className="bg-blue-600 bg-opacity-10 text-white px-2 text-md py-2 rounded-lg hover:bg-blue-700 hover:bg-opacity-30 transition-colors mt-4"
+            className="bg-blue-600 bg-opacity-50 text-white px-2 text-md py-2 rounded-lg hover:bg-blue-700 hover:bg-opacity-70 transition-colors mt-4"
           >
             More Details
           </button>
@@ -258,14 +258,7 @@ function RecipeContent() {
             >
               Back to List
             </button>
-            <a
-              href={ytURL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 bg-red-600 text-white px-2 py-2 rounded-lg hover:bg-red-700 transition-colors m-2"
-            >
-              <Image src={YoutubeIcon} alt="YouTube" width={24} height={24} className="inline-block" />
-            </a>
+            
           </div>
           <div className="bg-slate-900 bg-gray-800 mt-4 p-4 rounded-lg recipe-card frosted-glass" style={{ animationDelay: `${0.1}s` }}>
             <h2 className="text-2xl text-white text-gray-100 font-bold mb-2">Share this recipe</h2>
@@ -343,34 +336,44 @@ function RecipeContent() {
             >
               View Original Recipe
             </a>
+            <a
+              href={ytURL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 bg-red-600 text-white px-2 py-2 rounded-lg hover:bg-red-700 transition-colors m-2"
+            >
+              <Image src={YoutubeIcon} alt="YouTube" width={24} height={24} className="inline-block mr-2" />
+              Watch on YouTube
+            </a>
           </div>
           
         </div>
+        <div className="grow"></div>
       </div>
       {isDetailsOpen && (
         <div className="fixed inset-0 bg-slate-950 bg-opacity-50 flex justify-center items-center" onClick={closeDetails}>
           <div className="bg-slate-950 bg-opacity-90 p-4 rounded-lg relative recipe-card frosted-glass max-w-3xl">
             <button
               onClick={closeDetails}
-              className="absolute top-2 right-2 text-red-500"
+              className="absolute top-2 right-3 text-red-500"
             >
               X
             </button>
-            <h2 className="text-xl font-bold">More Details</h2>
-            <h5 className="text-lg text-orange-300"><strong>Cautions:</strong></h5><p className=" text-orange-200"> {recipe.cautions.join(', ')}</p>
-            <h5 className="text-lg"><strong>Source:</strong></h5><p> {recipe.source}</p>
-            <h5 className="text-lg"><strong>URL:</strong> </h5><p>
+            <h2 className="text-xl mb-4 font-bold">More Details</h2>
+            <h5 className="text-lg text-orange-300"><strong>Cautions:</strong></h5><p className="pb-2 text-orange-200"> {recipe.cautions.join(', ')}</p>
+            <h5 className="text-lg "><strong>Source:</strong></h5><p className='pb-2'> {recipe.source}</p>
+            <h5 className="text-lg "><strong>URL:</strong> </h5><p className='pb-2 hover:text-gray-200'>
               <a href={recipe.url} target="_blank" rel="noopener noreferrer">{recipe.url}</a>
             </p>
-            <h5 className="text-lg"><strong>Calories:</strong></h5><p> {Math.round(recipe.calories)} kcal</p>
-            <h5 className="text-lg"><strong>Diet Labels:</strong></h5><p> {recipe.dietLabels.join(', ')}</p>
-            <h5 className="text-lg"><strong>Health Labels:</strong></h5><p> {recipe.healthLabels.join(', ')}</p>
-            <h5 className="text-lg"><strong>Meal Type:</strong></h5><p> {recipe.dishType.join(', ')}</p>
-            <h5 className="text-lg"><strong>Cuisine:</strong></h5><p> {recipe.cuisineType.join(', ')}</p>
+            <h5 className="text-lg "><strong>Calories:</strong></h5><p className='pb-2'> {Math.round(recipe.calories)} kcal</p>
+            <h5 className="text-lg "><strong>Diet Labels:</strong></h5><p className='pb-2'> {recipe.dietLabels.join(', ')}</p>
+            <h5 className="text-lg "><strong>Health Labels:</strong></h5><p className='pb-2'> {recipe.healthLabels.join(', ')}</p>
+            <h5 className="text-lg "><strong>Meal Type:</strong></h5><p className='pb-2'> {recipe.dishType.join(', ')}</p>
+            <h5 className="text-lg"><strong>Cuisine:</strong></h5><p className='pb-2'> {recipe.cuisineType.join(', ')}</p>
           </div>
         </div>
       )}
-      <div className="w-xl h-md rounded-xl shadow-lg p-8 mt-24">
+      <div className="w-xl h-md rounded-xl-lg p-8 mt-24">
         <div className="container mx-auto flex justify-center space-x-4 rounded-lg">
           <p className="justify-center text-gray-200 text-gray-200">Copyright 2025 Tay März</p>
         </div>
