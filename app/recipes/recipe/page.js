@@ -348,8 +348,9 @@ function RecipeContent() {
           </div>
           
         </div>
-        <div className="grow"></div>
       </div>
+      <div className="grow"></div>
+
       {isDetailsOpen && (
         <div className="fixed inset-0 bg-slate-950 bg-opacity-50 flex justify-center items-center" onClick={closeDetails}>
           <div className="bg-slate-950 bg-opacity-90 p-4 rounded-lg relative recipe-card frosted-glass max-w-3xl">
